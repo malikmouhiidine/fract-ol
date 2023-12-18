@@ -23,6 +23,8 @@ typedef struct s_program
 {
 	void	*mlx;
 	void	*win;
+	char	*fractol_type;
+	int		max_iteration;
 	t_image	img;
 }	t_program;
 
