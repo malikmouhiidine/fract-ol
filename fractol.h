@@ -2,7 +2,7 @@
 #include <math.h>
 #include <unistd.h>
 #include <stdlib.h>
-#include <mlx.h>
+#include "mlx.h"
 #include "libft/libft.h"
 
 #define ERROR_MSG "usage:\n\tfractol mandelbrot\n\tfractol julia <r> <i>\n"
@@ -21,15 +21,15 @@ typedef struct s_image
 
 typedef struct s_program
 {
-	void	*mlx;
-	void	*win;
-	char	*fractol_type;
-	int		max_iteration;
-	int		right_x;
-	int		left_x;
-	int		top_y;
-	int		bottom_y;
-	t_image	*img;
+	void		*mlx;
+	void		*win;
+	char		*fractol_type;
+	int			max_iteration;
+	double		right_x;
+	double		left_x;
+	double		top_y;
+	double		bottom_y;
+	t_image		*img;
 }	t_program;
 
 int	ft_strcmp(char *s1, char *s2);

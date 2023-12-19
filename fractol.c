@@ -48,6 +48,9 @@ int	close_window(t_program *param)
 
 int	key_hook(int keycode, t_program *program)
 {
+	double	offset;
+
+	offset = fabs(program->right_x - program->left_x) / 4;
 	if (keycode == 24)
 	{
 		program->max_iteration += 100;
@@ -59,33 +62,53 @@ int	key_hook(int keycode, t_program *program)
 	}
 	else if (keycode == 126)
 	{
-		program->top_y += 1;
-		program->bottom_y += 1;
+		program->top_y += offset;
+		program->bottom_y += offset;
 	}
 	else if (keycode == 125)
 	{
-		program->top_y -= 1;
-		program->bottom_y -= 1;
+		program->top_y -= offset;
+		program->bottom_y -= offset;
 	}
 	else if (keycode == 124)
 	{
-		program->right_x += 1;
-		program->left_x += 1;
+		program->right_x += offset;
+		program->left_x += offset;
 	}
 	else if (keycode == 123)
 	{
-		program->right_x -= 1;
-		program->left_x -= 1;
+		program->right_x -= offset;
+		program->left_x -= offset;
 	}
 	else if (keycode == 53)
 		exit(0);
 	return (0);
 }
 
-int	mouse_hook(int keycode, t_program *param)
+int	mouse_hook(int keycode, int x, int y, t_program *program)
 {
-	(void)param;
-	(void)keycode;
+	double	offset;
+
+	(void)program;
+	offset = fabs(program->right_x - program->left_x) / 4;
+	if (y >= 0 && x >= 0)
+	{
+		if (keycode == 5)
+		{
+			program->top_y += offset;
+			program->bottom_y -= offset;
+			program->right_x += offset;
+			program->left_x -= offset;
+		}
+		else if (keycode == 4)
+		{
+			program->top_y -= offset;
+			program->bottom_y += offset;
+			program->right_x -= offset;
+			program->left_x += offset;
+		}
+	}
+	printf("Mouse Hook: keycode: %d, x: %d, y: %d\n", keycode, x, y);
 	return (0);
 }
 
@@ -104,9 +127,9 @@ void	opt_mlx_pixel_put(t_image *img, int x, int y, int color)
 
 int	generate_color(int max_iteration, double xo, double yo)
 {
-	float	x;
-	float	y;
-	float	temp_x;
+	double	x;
+	double	y;
+	double	temp_x;
 	int		iteration;
 
 	x = 0;
