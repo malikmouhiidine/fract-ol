@@ -1,5 +1,39 @@
 #include "fractol.h"
 
+int	get_color(int iteration, int max_iteration)
+{
+	int		i;
+	int		mapping[16];
+	int		black;
+
+	if (iteration < max_iteration && iteration > 0)
+	{
+		i = iteration % 16;
+		mapping[0] = 0x421E0F;
+		mapping[1] = 0x19071A;
+		mapping[2] = 0x09012F;
+		mapping[3] = 0x040449;
+		mapping[4] = 0x000764;
+		mapping[5] = 0x0C2C8A;
+		mapping[6] = 0x1852B1;
+		mapping[7] = 0x397DD1;
+		mapping[8] = 0x86B5E5;
+		mapping[9] = 0xD3ECF8;
+		mapping[10] = 0xF1E9BF;
+		mapping[11] = 0xF8C95F;
+		mapping[12] = 0xFFAA00;
+		mapping[13] = 0xCC8000;
+		mapping[14] = 0x995700;
+		mapping[15] = 0x6A3403;
+		return (mapping[i]);
+	}
+	else
+	{
+		black = 0;
+		return (black);
+	}
+}
+
 void	invalid_args_handler(void)
 {
 	ft_putstr_fd(ERROR_MSG, 2);
@@ -57,6 +91,12 @@ void	fractol_init(t_program *program, char **argv)
 	mlx_key_hook(program->win, key_hook, program);
 	mlx_mouse_hook(program->win, mouse_hook, program);
 	mlx_hook(program->win, 17, 0, close_window, program);
+	program->img->img = mlx_new_image(program->win, WIDTH, HEIGHT);
+	program->img->addr = mlx_get_data_addr(program->img->img,
+			&program->img->bits_per_pixel,
+			&program->img->line_length,
+			&program->img->endian);
+	mlx_put_image_to_window(program->mlx, program->win, program->img->img, 0, 0);
 }
 
 int	generate_color(int max_iteration, double xo, double yo)
@@ -76,7 +116,7 @@ int	generate_color(int max_iteration, double xo, double yo)
 		x = temp_x;
 		iteration++;
 	}
-	return (scale(iteration, 0, max_iteration, 0x000000, 0x0000FF));
+	return (get_color(iteration, max_iteration));
 }
 
 int	render_fractor(t_program *program)
@@ -84,11 +124,6 @@ int	render_fractor(t_program *program)
 	int	x;
 	int	y;
 
-	program->img.img = mlx_new_image(program->win, WIDTH, HEIGHT);
-	program->img.addr = mlx_get_data_addr(program->img.img,
-			&program->img.bits_per_pixel,
-			&program->img.line_length,
-			&program->img.endian);
 	if (!ft_strcmp("mandelbrot", program->fractol_type))
 	{
 		y = 0;
@@ -97,7 +132,7 @@ int	render_fractor(t_program *program)
 			x = 0;
 			while (x < WIDTH)
 			{
-				opt_mlx_pixel_put(&program->img, x, y,
+				opt_mlx_pixel_put(program->img, x, y,
 					generate_color(
 						program->max_iteration,
 						scale((double)x, 0, 800, -2, 2),
@@ -107,7 +142,6 @@ int	render_fractor(t_program *program)
 			y++;
 		}
 	}
-	mlx_put_image_to_window(program->mlx, program->win, program->img.img, 0, 0);
 	printf("Hello %d\n", program->max_iteration);
 	return (0);
 }
@@ -117,6 +151,7 @@ void	fract_handler(char **argv)
 	t_program	*program;
 
 	program = (t_program *)malloc(sizeof(t_program));
+	program->img = (t_image *)malloc(sizeof(t_image));
 	fractol_init(program, argv);
 	mlx_loop_hook(program->mlx, render_fractor, program);
 	mlx_loop(program->mlx);

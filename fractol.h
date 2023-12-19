@@ -25,7 +25,7 @@ typedef struct s_program
 	void	*win;
 	char	*fractol_type;
 	int		max_iteration;
-	t_image	img;
+	t_image	*img;
 }	t_program;
 
 int	ft_strcmp(char *s1, char *s2);
