@@ -57,6 +57,26 @@ int	key_hook(int keycode, t_program *program)
 		if (program->max_iteration > 100)
 			program->max_iteration -= 100;
 	}
+	else if (keycode == 126)
+	{
+		program->top_y += 1;
+		program->bottom_y += 1;
+	}
+	else if (keycode == 125)
+	{
+		program->top_y -= 1;
+		program->bottom_y -= 1;
+	}
+	else if (keycode == 124)
+	{
+		program->right_x += 1;
+		program->left_x += 1;
+	}
+	else if (keycode == 123)
+	{
+		program->right_x -= 1;
+		program->left_x -= 1;
+	}
 	else if (keycode == 53)
 		exit(0);
 	return (0);
@@ -74,29 +94,12 @@ double	scale(double number, double inMin, double inMax, double outMin, double ou
     return ((number - inMin) * (outMax - outMin) / (inMax - inMin) + outMin);
 }
 
-void	opt_mlx_pixel_put(t_image *data, int x, int y, int color)
+void	opt_mlx_pixel_put(t_image *img, int x, int y, int color)
 {
 	char	*dst;
 
-	dst = data->addr + (y * data->line_length + x * (data->bits_per_pixel / 8));
+	dst = img->addr + (y * img->line_length + x * (img->bits_per_pixel / 8));
 	*(unsigned int *)dst = color;
-}
-
-void	fractol_init(t_program *program, char **argv)
-{
-	program->fractol_type = argv[1];
-	program->max_iteration = 500;
-	program->mlx = mlx_init();
-	program->win = mlx_new_window(program->mlx, WIDTH, HEIGHT, argv[1]);
-	mlx_key_hook(program->win, key_hook, program);
-	mlx_mouse_hook(program->win, mouse_hook, program);
-	mlx_hook(program->win, 17, 0, close_window, program);
-	program->img->img = mlx_new_image(program->win, WIDTH, HEIGHT);
-	program->img->addr = mlx_get_data_addr(program->img->img,
-			&program->img->bits_per_pixel,
-			&program->img->line_length,
-			&program->img->endian);
-	mlx_put_image_to_window(program->mlx, program->win, program->img->img, 0, 0);
 }
 
 int	generate_color(int max_iteration, double xo, double yo)
@@ -135,15 +138,35 @@ int	render_fractor(t_program *program)
 				opt_mlx_pixel_put(program->img, x, y,
 					generate_color(
 						program->max_iteration,
-						scale((double)x, 0, 800, -2, 2),
-						scale((double)y, 0, 800, 2, -2)));
+						scale((double)x, 0, 800, program->left_x, program->right_x),
+						scale((double)y, 0, 800, program->top_y, program->bottom_y)));
 				x++;
 			}
 			y++;
 		}
 	}
-	printf("Hello %d\n", program->max_iteration);
+	mlx_put_image_to_window(program->mlx, program->win, program->img->img, 0, 0);
 	return (0);
+}
+
+void	fractol_init(t_program *program, char **argv)
+{
+	program->fractol_type = argv[1];
+	program->max_iteration = 500;
+	program->right_x = 2;
+	program->left_x = -2;
+	program->top_y = 2;
+	program->bottom_y = -2;
+	program->mlx = mlx_init();
+	program->win = mlx_new_window(program->mlx, WIDTH, HEIGHT, argv[1]);
+	mlx_key_hook(program->win, key_hook, program);
+	mlx_mouse_hook(program->win, mouse_hook, program);
+	mlx_hook(program->win, 17, 0, close_window, program);
+	program->img->img = mlx_new_image(program->mlx, WIDTH, HEIGHT);
+	program->img->addr = mlx_get_data_addr(program->img->img,
+			&program->img->bits_per_pixel,
+			&program->img->line_length,
+			&program->img->endian);
 }
 
 void	fract_handler(char **argv)

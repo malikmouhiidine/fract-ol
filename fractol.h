@@ -25,6 +25,10 @@ typedef struct s_program
 	void	*win;
 	char	*fractol_type;
 	int		max_iteration;
+	int		right_x;
+	int		left_x;
+	int		top_y;
+	int		bottom_y;
 	t_image	*img;
 }	t_program;
 
