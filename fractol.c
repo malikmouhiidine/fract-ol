@@ -6,7 +6,7 @@
 /*   By: mmouhiid <mmouhiid@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/20 03:40:33 by mmouhiid          #+#    #+#             */
-/*   Updated: 2023/12/20 05:06:56 by mmouhiid         ###   ########.fr       */
+/*   Updated: 2023/12/20 06:06:01 by mmouhiid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,9 @@ static void	render_fractor_helper(t_program *program, int x, int y)
 	opt_mlx_pixel_put(program->img, x, y,
 		generate_color(
 			program->max_iteration,
-			scale((double)x, 0, 800, program->left_x, program->right_x),
-			scale((double)y, 0, 800, program->top_y, program->bottom_y)));
+			scale((double)x, 0, WIN_WIDTH, program->left_x, program->right_x),
+			scale((double)y, 0, WIN_HEIGHT, program->top_y, program->bottom_y),
+			program->color_pallete));
 }
 
 int	render_fractor(t_program *program)
@@ -48,6 +49,7 @@ int	render_fractor(t_program *program)
 void	fractol_init(t_program *program, char **argv)
 {
 	program->fractol_type = argv[1];
+	program->color_pallete = 1;
 	program->max_iteration = 30;
 	program->right_x = 2;
 	program->left_x = -2;

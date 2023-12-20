@@ -6,7 +6,7 @@
 /*   By: mmouhiid <mmouhiid@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/20 04:59:30 by mmouhiid          #+#    #+#             */
-/*   Updated: 2023/12/20 05:06:37 by mmouhiid         ###   ########.fr       */
+/*   Updated: 2023/12/20 05:37:39 by mmouhiid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,13 @@ void	key_hook_helper(int keycode, t_program *program, double offset)
 	{
 		program->right_x -= offset;
 		program->left_x -= offset;
+	}
+	else if (keycode == 8)
+	{
+		if (program->color_pallete == 1)
+			program->color_pallete = 2;
+		else
+			program->color_pallete = 1;
 	}
 	else if (keycode == 53)
 		exit(0);
