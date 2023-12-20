@@ -50,7 +50,7 @@ void	fractol_init(t_program *program, char **argv)
 {
 	program->fractol_type = argv[1];
 	program->color_pallete = 1;
-	program->max_iteration = 30;
+	program->max_iteration = 500;
 	program->right_x = 2;
 	program->left_x = -2;
 	program->top_y = 2;

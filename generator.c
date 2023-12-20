@@ -6,7 +6,7 @@
 /*   By: mmouhiid <mmouhiid@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/20 05:10:12 by mmouhiid          #+#    #+#             */
-/*   Updated: 2023/12/20 06:03:23 by mmouhiid         ###   ########.fr       */
+/*   Updated: 2023/12/20 18:36:40 by mmouhiid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,9 @@ int	get_color(int iteration, int max_iteration, int color_pallete)
 	int		first_pallete[16] = {0x421E0F, 0x19071A, 0x09012F, 0x040449,
 		0x000764, 0x0C2C8A, 0x1852B1, 0x397DD1, 0x86B5E5, 0xD3ECF8,
 		0xF1E9BF, 0xF8C95F, 0xFFAA00, 0xCC8000, 0x995700, 0x6A3403};
-	int		second_pallete[16] = {0xffd1b3, 0xffc680, 0xe5a873, 0xcb8b66,
-		0xdb9558, 0x743494, 0x3a1183, 0xccd041, 0x979b05, 0xe15420, 0xf05a7e,
-		0xe77992, 0xd3c211, 0x845486, 0xdbf56b, 0x9ba1d3};
+	int		second_pallete[16] = {0x421E3F, 0x19074A, 0x09015F, 0x040499,
+		0x0007A4, 0x0C2CCA, 0x1852F3, 0x397DF3, 0x86B5F6, 0xD3ECF9,
+		0xF1E9EF, 0xF8C99F, 0xFFAA51, 0xCC8051, 0x995751, 0x6A3454};
 
 	if (iteration < max_iteration && iteration > 0)
 	{
