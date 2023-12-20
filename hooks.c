@@ -6,7 +6,7 @@
 /*   By: mmouhiid <mmouhiid@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/20 04:59:30 by mmouhiid          #+#    #+#             */
-/*   Updated: 2023/12/20 05:37:39 by mmouhiid         ###   ########.fr       */
+/*   Updated: 2023/12/20 23:07:03 by mmouhiid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ int	key_hook(int keycode, t_program *program)
 {
 	double	offset;
 
-	offset = fabs(program->right_x - program->left_x) / 4;
+	offset = fabs(program->right_x - program->left_x) / 16;
 	key_hook_helper(keycode, program, offset);
 	return (0);
 }

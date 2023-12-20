@@ -6,7 +6,7 @@
 /*   By: mmouhiid <mmouhiid@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/20 03:40:33 by mmouhiid          #+#    #+#             */
-/*   Updated: 2023/12/20 06:06:01 by mmouhiid         ###   ########.fr       */
+/*   Updated: 2023/12/20 19:28:08 by mmouhiid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ void	fractol_init(t_program *program, char **argv)
 {
 	program->fractol_type = argv[1];
 	program->color_pallete = 1;
-	program->max_iteration = 500;
+	program->max_iteration = 70;
 	program->right_x = 2;
 	program->left_x = -2;
 	program->top_y = 2;

@@ -6,7 +6,7 @@
 /*   By: mmouhiid <mmouhiid@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/20 05:10:12 by mmouhiid          #+#    #+#             */
-/*   Updated: 2023/12/20 18:36:40 by mmouhiid         ###   ########.fr       */
+/*   Updated: 2023/12/20 19:19:28 by mmouhiid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,17 +42,21 @@ int	generate_color(int max_iteration, double xo, double yo, int color_pallete)
 {
 	double	x;
 	double	y;
-	double	temp_x;
+	double	x2;
+	double	y2;
 	int		iteration;
 
 	x = 0;
 	y = 0;
+	x2 = 0;
+	y2 = 0;
 	iteration = 0;
-	while (((x * x) + (y * y)) < 4 && iteration < max_iteration)
+	while ((x2 + y2) <= 4 && iteration < max_iteration)
 	{
-		temp_x = (x * x) - (y * y) + xo;
-		y = ((2 * y) * x) + yo;
-		x = temp_x;
+		y = 2 * y * x + yo;
+		x = x2 - y2 + xo;
+		x2 = x * x;
+		y2 = y * y;
 		iteration++;
 	}
 	return (get_color(iteration, max_iteration, color_pallete));

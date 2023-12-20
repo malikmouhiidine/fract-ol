@@ -6,7 +6,7 @@
 /*   By: mmouhiid <mmouhiid@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/20 03:40:40 by mmouhiid          #+#    #+#             */
-/*   Updated: 2023/12/20 06:10:30 by mmouhiid         ###   ########.fr       */
+/*   Updated: 2023/12/20 23:05:27 by mmouhiid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,4 +57,5 @@ int		key_hook(int keycode, t_program *program);
 int		mouse_hook(int keycode, int x, int y, t_program *program);
 
 int		get_color(int iteration, int max_iteration, int color_pallete);
-int		generate_color(int max_iteration, double xo, double yo, int color_pallete);
+int		generate_color(int max_iteration, double xo, double yo,
+			int color_pallete);
