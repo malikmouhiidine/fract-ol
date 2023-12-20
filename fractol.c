@@ -1,40 +1,36 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   fractol.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mmouhiid <mmouhiid@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/12/20 03:40:33 by mmouhiid          #+#    #+#             */
+/*   Updated: 2023/12/20 04:22:42 by mmouhiid         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "fractol.h"
 
-int	get_color(int iteration, int max_iteration)
+static int	get_color(int iteration, int max_iteration)
 {
 	int		i;
-	int		mapping[16];
-	int		black;
+	int		mapping[16] = {0x421E0F, 0x19071A, 0x09012F, 0x040449, 0x000764,
+		0x0C2C8A, 0x1852B1, 0x397DD1, 0x86B5E5, 0xD3ECF8, 0xF1E9BF, 0xF8C95F,
+		0xFFAA00, 0xCC8000, 0x995700, 0x6A3403};
 
 	if (iteration < max_iteration && iteration > 0)
 	{
 		i = iteration % 16;
-		mapping[0] = 0x421E0F;
-		mapping[1] = 0x19071A;
-		mapping[2] = 0x09012F;
-		mapping[3] = 0x040449;
-		mapping[4] = 0x000764;
-		mapping[5] = 0x0C2C8A;
-		mapping[6] = 0x1852B1;
-		mapping[7] = 0x397DD1;
-		mapping[8] = 0x86B5E5;
-		mapping[9] = 0xD3ECF8;
-		mapping[10] = 0xF1E9BF;
-		mapping[11] = 0xF8C95F;
-		mapping[12] = 0xFFAA00;
-		mapping[13] = 0xCC8000;
-		mapping[14] = 0x995700;
-		mapping[15] = 0x6A3403;
 		return (mapping[i]);
 	}
 	else
 	{
-		black = 0;
-		return (black);
+		return (0);
 	}
 }
 
-void	invalid_args_handler(void)
+static void	invalid_args_handler(void)
 {
 	ft_putstr_fd(ERROR_MSG, 2);
 	exit(1);
@@ -43,23 +39,15 @@ void	invalid_args_handler(void)
 int	close_window(t_program *param)
 {
 	(void)param;
-	exit(1);
+	exit(0);
 }
 
-int	key_hook(int keycode, t_program *program)
+static void	key_hook_helper(int keycode, t_program *program, double offset)
 {
-	double	offset;
-
-	offset = fabs(program->right_x - program->left_x) / 4;
 	if (keycode == 24)
-	{
 		program->max_iteration += 10;
-	}
-	else if (keycode == 27)
-	{
-		if (program->max_iteration > 10)
-			program->max_iteration -= 10;
-	}
+	else if (keycode == 27 && program->max_iteration > 10)
+		program->max_iteration -= 10;
 	else if (keycode == 126)
 	{
 		program->top_y += offset;
@@ -82,12 +70,26 @@ int	key_hook(int keycode, t_program *program)
 	}
 	else if (keycode == 53)
 		exit(0);
+}
+
+int	key_hook(int keycode, t_program *program)
+{
+	double	offset;
+
+	offset = fabs(program->right_x - program->left_x) / 4;
+	key_hook_helper(keycode, program, offset);
 	return (0);
 }
 
-double	scale(double number, double inMin, double inMax, double outMin, double outMax)
+double	scale(double number, double inMin, double inMax,
+		double outMin, double outMax)
 {
-    return ((number - inMin) * (outMax - outMin) / (inMax - inMin) + outMin);
+	double	scaled_value;
+
+	scaled_value = (number - inMin) * (outMax - outMin);
+	scaled_value = scaled_value / (inMax - inMin);
+	scaled_value = scaled_value + outMin;
+	return (scaled_value);
 }
 
 int	mouse_hook(int keycode, int x, int y, t_program *program)
@@ -98,16 +100,22 @@ int	mouse_hook(int keycode, int x, int y, t_program *program)
 
 	if (y >= 0 && x >= 0 && (keycode == 5 || keycode == 4))
 	{
-		mouse_x_scaled = scale(x, 0, WIN_WIDTH, program->left_x, program->right_x);
-		mouse_y_scaled = scale(y, 0, WIN_HEIGHT, program->top_y, program->bottom_y);
+		mouse_x_scaled = scale(x, 0, WIN_WIDTH, program->left_x,
+				program->right_x);
+		mouse_y_scaled = scale(y, 0, WIN_HEIGHT, program->top_y,
+				program->bottom_y);
 		if (keycode == 4)
 			zoom_factor = 0.75;
 		else
 			zoom_factor = 1.25;
-		program->left_x = mouse_x_scaled + zoom_factor * (program->left_x - mouse_x_scaled);
-		program->right_x = mouse_x_scaled + zoom_factor * (program->right_x - mouse_x_scaled);
-		program->top_y = mouse_y_scaled + zoom_factor * (program->top_y - mouse_y_scaled);
-		program->bottom_y = mouse_y_scaled + zoom_factor * (program->bottom_y - mouse_y_scaled);
+		program->left_x = mouse_x_scaled + zoom_factor * (
+				program->left_x - mouse_x_scaled);
+		program->right_x = mouse_x_scaled + zoom_factor * (
+				program->right_x - mouse_x_scaled);
+		program->top_y = mouse_y_scaled + zoom_factor * (
+				program->top_y - mouse_y_scaled);
+		program->bottom_y = mouse_y_scaled + zoom_factor * (
+				program->bottom_y - mouse_y_scaled);
 	}
 	return (0);
 }
@@ -140,6 +148,15 @@ int	generate_color(int max_iteration, double xo, double yo)
 	return (get_color(iteration, max_iteration));
 }
 
+static void	render_fractor_helper(t_program *program, int x, int y)
+{
+	opt_mlx_pixel_put(program->img, x, y,
+		generate_color(
+			program->max_iteration,
+			scale((double)x, 0, 800, program->left_x, program->right_x),
+			scale((double)y, 0, 800, program->top_y, program->bottom_y)));
+}
+
 int	render_fractor(t_program *program)
 {
 	int	x;
@@ -153,17 +170,14 @@ int	render_fractor(t_program *program)
 			x = 0;
 			while (x < WIN_WIDTH)
 			{
-				opt_mlx_pixel_put(program->img, x, y,
-					generate_color(
-						program->max_iteration,
-						scale((double)x, 0, 800, program->left_x, program->right_x),
-						scale((double)y, 0, 800, program->top_y, program->bottom_y)));
+				render_fractor_helper(program, x, y);
 				x++;
 			}
 			y++;
 		}
 	}
-	mlx_put_image_to_window(program->mlx, program->win, program->img->img, 0, 0);
+	mlx_put_image_to_window(program->mlx,
+		program->win, program->img->img, 0, 0);
 	return (0);
 }
 
