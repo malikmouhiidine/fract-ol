@@ -53,12 +53,12 @@ int	key_hook(int keycode, t_program *program)
 	offset = fabs(program->right_x - program->left_x) / 4;
 	if (keycode == 24)
 	{
-		program->max_iteration += 100;
+		program->max_iteration += 50;
 	}
 	else if (keycode == 27)
 	{
 		if (program->max_iteration > 100)
-			program->max_iteration -= 100;
+			program->max_iteration -= 50;
 	}
 	else if (keycode == 126)
 	{
@@ -85,36 +85,31 @@ int	key_hook(int keycode, t_program *program)
 	return (0);
 }
 
-int	mouse_hook(int keycode, int x, int y, t_program *program)
-{
-	double	offset;
-
-	(void)program;
-	offset = fabs(program->right_x - program->left_x) / 4;
-	if (y >= 0 && x >= 0)
-	{
-		if (keycode == 5)
-		{
-			program->top_y += offset;
-			program->bottom_y -= offset;
-			program->right_x += offset;
-			program->left_x -= offset;
-		}
-		else if (keycode == 4)
-		{
-			program->top_y -= offset;
-			program->bottom_y += offset;
-			program->right_x -= offset;
-			program->left_x += offset;
-		}
-	}
-	printf("Mouse Hook: keycode: %d, x: %d, y: %d\n", keycode, x, y);
-	return (0);
-}
-
 double	scale(double number, double inMin, double inMax, double outMin, double outMax)
 {
     return ((number - inMin) * (outMax - outMin) / (inMax - inMin) + outMin);
+}
+
+int	mouse_hook(int keycode, int x, int y, t_program *program)
+{
+	double	mouse_x_scaled;
+	double	mouse_y_scaled;
+	double	zoom_factor;
+
+	if (y >= 0 && x >= 0 && (keycode == 5 || keycode == 4))
+	{
+		mouse_x_scaled = scale(x, 0, WIN_WIDTH, program->left_x, program->right_x);
+		mouse_y_scaled = scale(y, 0, WIN_HEIGHT, program->top_y, program->bottom_y);
+		if (keycode == 4)
+			zoom_factor = 0.75;
+		else
+			zoom_factor = 1.25;
+		program->left_x = mouse_x_scaled + zoom_factor * (program->left_x - mouse_x_scaled);
+		program->right_x = mouse_x_scaled + zoom_factor * (program->right_x - mouse_x_scaled);
+		program->top_y = mouse_y_scaled + zoom_factor * (program->top_y - mouse_y_scaled);
+		program->bottom_y = mouse_y_scaled + zoom_factor * (program->bottom_y - mouse_y_scaled);
+	}
+	return (0);
 }
 
 void	opt_mlx_pixel_put(t_image *img, int x, int y, int color)
@@ -153,10 +148,10 @@ int	render_fractor(t_program *program)
 	if (!ft_strcmp("mandelbrot", program->fractol_type))
 	{
 		y = 0;
-		while (y < HEIGHT)
+		while (y < WIN_HEIGHT)
 		{
 			x = 0;
-			while (x < WIDTH)
+			while (x < WIN_WIDTH)
 			{
 				opt_mlx_pixel_put(program->img, x, y,
 					generate_color(
@@ -175,17 +170,17 @@ int	render_fractor(t_program *program)
 void	fractol_init(t_program *program, char **argv)
 {
 	program->fractol_type = argv[1];
-	program->max_iteration = 500;
+	program->max_iteration = 150;
 	program->right_x = 2;
 	program->left_x = -2;
 	program->top_y = 2;
 	program->bottom_y = -2;
 	program->mlx = mlx_init();
-	program->win = mlx_new_window(program->mlx, WIDTH, HEIGHT, argv[1]);
+	program->win = mlx_new_window(program->mlx, WIN_WIDTH, WIN_HEIGHT, argv[1]);
 	mlx_key_hook(program->win, key_hook, program);
 	mlx_mouse_hook(program->win, mouse_hook, program);
 	mlx_hook(program->win, 17, 0, close_window, program);
-	program->img->img = mlx_new_image(program->mlx, WIDTH, HEIGHT);
+	program->img->img = mlx_new_image(program->mlx, WIN_WIDTH, WIN_HEIGHT);
 	program->img->addr = mlx_get_data_addr(program->img->img,
 			&program->img->bits_per_pixel,
 			&program->img->line_length,

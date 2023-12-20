@@ -7,8 +7,8 @@
 
 #define ERROR_MSG "usage:\n\tfractol mandelbrot\n\tfractol julia <r> <i>\n"
 
-#define HEIGHT 800
-#define WIDTH 800
+#define WIN_HEIGHT 800
+#define WIN_WIDTH 800
 
 typedef struct s_image
 {
