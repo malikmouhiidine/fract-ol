@@ -2,7 +2,7 @@ NAME = fractol
 CC = cc
 CFLAGS = -Wall -Wextra -Werror
 
-SRCS = fractol.c helpers/ft_strcmp.c
+SRCS = fractol.c helpers.c hooks.c generator.c
 OBJS = $(SRCS:.c=.o)
 
 LIBFT_DIR = libft

@@ -1,14 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strcmp.c                                        :+:      :+:    :+:   */
+/*   helpers.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mmouhiid <mmouhiid@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/20 03:42:54 by mmouhiid          #+#    #+#             */
-/*   Updated: 2023/12/20 03:47:37 by mmouhiid         ###   ########.fr       */
+/*   Updated: 2023/12/20 05:01:39 by mmouhiid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+#include "fractol.h"
 
 int	ft_strcmp(char *s1, char *s2)
 {
@@ -18,4 +20,29 @@ int	ft_strcmp(char *s1, char *s2)
 	while (s1[i] == s2[i] && s1[i] != '\0' && s2[i] != '\0')
 		i++;
 	return (s1[i] - s2[i]);
+}
+
+double	scale(double number, double inMin, double inMax,
+		double outMin, double outMax)
+{
+	double	scaled_value;
+
+	scaled_value = (number - inMin) * (outMax - outMin);
+	scaled_value = scaled_value / (inMax - inMin);
+	scaled_value = scaled_value + outMin;
+	return (scaled_value);
+}
+
+void	invalid_args_handler(void)
+{
+	ft_putstr_fd(ERROR_MSG, 2);
+	exit(1);
+}
+
+void	opt_mlx_pixel_put(t_image *img, int x, int y, int color)
+{
+	char	*dst;
+
+	dst = img->addr + (y * img->line_length + x * (img->bits_per_pixel / 8));
+	*(unsigned int *)dst = color;
 }

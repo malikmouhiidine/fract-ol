@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fractol.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mmouhiid <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: mmouhiid <mmouhiid@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/20 03:40:40 by mmouhiid          #+#    #+#             */
-/*   Updated: 2023/12/20 03:40:41 by mmouhiid         ###   ########.fr       */
+/*   Updated: 2023/12/20 05:07:22 by mmouhiid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,4 +44,17 @@ typedef struct s_program
 	t_image		*img;
 }	t_program;
 
-int	ft_strcmp(char *s1, char *s2);
+void	invalid_args_handler(void);
+int		ft_strcmp(char *s1, char *s2);
+int		get_color(int iteration, int max_iteration);
+void	opt_mlx_pixel_put(t_image *img, int x, int y, int color);
+double	scale(double number, double inMin, double inMax,
+			double outMin, double outMax);
+
+int		close_window(t_program *param);
+void	key_hook_helper(int keycode, t_program *program, double offset);
+int		key_hook(int keycode, t_program *program);
+int		mouse_hook(int keycode, int x, int y, t_program *program);
+
+int		get_color(int iteration, int max_iteration);
+int		generate_color(int max_iteration, double xo, double yo);
