@@ -53,12 +53,12 @@ int	key_hook(int keycode, t_program *program)
 	offset = fabs(program->right_x - program->left_x) / 4;
 	if (keycode == 24)
 	{
-		program->max_iteration += 50;
+		program->max_iteration += 10;
 	}
 	else if (keycode == 27)
 	{
-		if (program->max_iteration > 100)
-			program->max_iteration -= 50;
+		if (program->max_iteration > 10)
+			program->max_iteration -= 10;
 	}
 	else if (keycode == 126)
 	{
@@ -170,7 +170,7 @@ int	render_fractor(t_program *program)
 void	fractol_init(t_program *program, char **argv)
 {
 	program->fractol_type = argv[1];
-	program->max_iteration = 150;
+	program->max_iteration = 30;
 	program->right_x = 2;
 	program->left_x = -2;
 	program->top_y = 2;
