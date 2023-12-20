@@ -6,26 +6,26 @@
 /*   By: mmouhiid <mmouhiid@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/20 03:40:33 by mmouhiid          #+#    #+#             */
-/*   Updated: 2023/12/20 19:28:08 by mmouhiid         ###   ########.fr       */
+/*   Updated: 2023/12/21 00:12:18 by mmouhiid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
 
-static void	render_fractor_helper(t_program *program, int x, int y)
+static void	render_fractor_helper(t_program *program, long double x, long double y)
 {
 	opt_mlx_pixel_put(program->img, x, y,
 		generate_color(
 			program->max_iteration,
-			scale((double)x, 0, WIN_WIDTH, program->left_x, program->right_x),
-			scale((double)y, 0, WIN_HEIGHT, program->top_y, program->bottom_y),
+			scale(x, 0, WIN_WIDTH, program->left_x, program->right_x),
+			scale(y, 0, WIN_HEIGHT, program->top_y, program->bottom_y),
 			program->color_pallete));
 }
 
 int	render_fractor(t_program *program)
 {
-	int	x;
-	int	y;
+	long double	x;
+	long double	y;
 
 	if (!ft_strcmp("mandelbrot", program->fractol_type))
 	{

@@ -6,7 +6,7 @@
 /*   By: mmouhiid <mmouhiid@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/20 04:59:30 by mmouhiid          #+#    #+#             */
-/*   Updated: 2023/12/20 23:07:03 by mmouhiid         ###   ########.fr       */
+/*   Updated: 2023/12/21 00:17:23 by mmouhiid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ int	close_window(t_program *param)
 	exit(0);
 }
 
-void	key_hook_helper(int keycode, t_program *program, double offset)
+void	key_hook_helper(int keycode, t_program *program, long double offset)
 {
 	if (keycode == 24)
 		program->max_iteration += 10;
@@ -57,18 +57,18 @@ void	key_hook_helper(int keycode, t_program *program, double offset)
 
 int	key_hook(int keycode, t_program *program)
 {
-	double	offset;
+	long double	offset;
 
-	offset = fabs(program->right_x - program->left_x) / 16;
+	offset = fabsl(program->right_x - program->left_x) / 16;
 	key_hook_helper(keycode, program, offset);
 	return (0);
 }
 
 int	mouse_hook(int keycode, int x, int y, t_program *program)
 {
-	double	mouse_x_scaled;
-	double	mouse_y_scaled;
-	double	zoom_factor;
+	long double	mouse_x_scaled;
+	long double	mouse_y_scaled;
+	long double	zoom_factor;
 
 	if (y >= 0 && x >= 0 && (keycode == 5 || keycode == 4))
 	{
