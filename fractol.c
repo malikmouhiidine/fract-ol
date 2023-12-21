@@ -6,7 +6,7 @@
 /*   By: mmouhiid <mmouhiid@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/20 03:40:33 by mmouhiid          #+#    #+#             */
-/*   Updated: 2023/12/21 18:13:27 by mmouhiid         ###   ########.fr       */
+/*   Updated: 2023/12/21 22:39:09 by mmouhiid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ void	fractol_init(t_program *program, char **argv)
 		program->c_y = ft_atoildbl(argv[3]);
 	}
 	program->color_pallete = 1;
-	program->max_iteration = 50;
+	program->max_iteration = 60;
 	program->right_x = 2;
 	program->left_x = -2;
 	program->top_y = 2;

@@ -6,7 +6,7 @@
 /*   By: mmouhiid <mmouhiid@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/20 05:10:12 by mmouhiid          #+#    #+#             */
-/*   Updated: 2023/12/21 19:39:10 by mmouhiid         ###   ########.fr       */
+/*   Updated: 2023/12/21 22:39:22 by mmouhiid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,10 +65,19 @@ int	generate_color(t_program *program, long double xo, long double yo)
 	}
 	else if (!ft_strcmp("julia", program->fractol_type))
 	{
-		while ((x2 + y2) <= 4 && iteration < program->max_iteration)
+		long double R = 0;
+		while (R * R - R < sqrt(program->c_x * program->c_x + program->c_y * program->c_y)) {
+			R += 0.01;
+		}
+		x = xo;
+		y = yo;
+		x2 = x * x;
+		y2 = y * y;
+		while ((x2 + y2) <= R * R && iteration < program->max_iteration)
 		{
-			y = 2 * y * x + program->c_y;
-			x = x2 - y2 + program->c_x;
+			long double xtemp = x2 - y2 + program->c_x;
+			y = 2 * x * y + program->c_y;
+			x = xtemp;
 			x2 = x * x;
 			y2 = y * y;
 			iteration++;
