@@ -6,7 +6,7 @@
 /*   By: mmouhiid <mmouhiid@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/20 03:42:54 by mmouhiid          #+#    #+#             */
-/*   Updated: 2023/12/21 00:16:11 by mmouhiid         ###   ########.fr       */
+/*   Updated: 2023/12/21 18:10:56 by mmouhiid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,4 +45,41 @@ void	opt_mlx_pixel_put(t_image *img, int x, int y, int color)
 
 	dst = img->addr + (y * img->line_length + x * (img->bits_per_pixel / 8));
 	*(unsigned int *)dst = color;
+}
+
+long double ft_atoildbl(char *str)
+{
+    size_t			i;
+    long double		res;
+    long double		sign;
+    long double		decimal_place;
+
+    res = 0;
+    sign = 1;
+    i = 0;
+    decimal_place = 1;
+    while (str[i] == ' ' || str[i] == '\t' || str[i] == '\n' ||
+            str[i] == '\r' || str[i] == '\v' || str[i] == '\f')
+        i++;
+    if (str[i] == '-')
+        sign = -1;
+    if (str[i] == '-' || str[i] == '+')
+        i++;
+    while ((str[i] >= '0' && str[i] <= '9') || str[i] == '.')
+    {
+        if (str[i] == '.')
+        {
+            decimal_place = 0.1;
+            i++;
+        }
+        if (decimal_place == 1)
+            res = res * 10 + (str[i] - '0');
+        else
+        {
+            res = res + (str[i] - '0') * decimal_place;
+            decimal_place /= 10;
+        }
+        i++;
+    }
+    return (res * sign);
 }

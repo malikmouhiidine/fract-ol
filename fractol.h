@@ -6,7 +6,7 @@
 /*   By: mmouhiid <mmouhiid@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/20 03:40:40 by mmouhiid          #+#    #+#             */
-/*   Updated: 2023/12/21 00:15:20 by mmouhiid         ###   ########.fr       */
+/*   Updated: 2023/12/21 18:12:34 by mmouhiid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 #include <mlx.h>
 #include "libft/libft.h"
 
-#define ERROR_MSG "usage:\n\tfractol mandelbrot\n\tfractol julia <r> <i>\n"
+#define ERROR_MSG "usage:\n\tfractol mandelbrot\n\tfractol julia <r> <i>\n\tfractol burningship\n"
 
 #define WIN_HEIGHT 1200
 #define WIN_WIDTH 1200
@@ -42,9 +42,12 @@ typedef struct s_program
 	long double		left_x;
 	long double		top_y;
 	long double		bottom_y;
+	long double		c_x;
+	long double		c_y;
 	t_image			*img;
 }	t_program;
 
+long double ft_atoildbl(char *str);
 void	invalid_args_handler(void);
 int		ft_strcmp(char *s1, char *s2);
 void	opt_mlx_pixel_put(t_image *img, int x, int y, int color);
@@ -57,5 +60,4 @@ int		key_hook(int keycode, t_program *program);
 int		mouse_hook(int keycode, int x, int y, t_program *program);
 
 int		get_color(int iteration, int max_iteration, int color_pallete);
-int		generate_color(int max_iteration, long double xo, long double yo,
-			int color_pallete);
+int		generate_color(t_program *program, long double xo, long double yo);

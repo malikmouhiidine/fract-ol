@@ -6,7 +6,7 @@
 /*   By: mmouhiid <mmouhiid@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/20 03:40:33 by mmouhiid          #+#    #+#             */
-/*   Updated: 2023/12/21 00:12:18 by mmouhiid         ###   ########.fr       */
+/*   Updated: 2023/12/21 18:13:27 by mmouhiid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,10 +16,9 @@ static void	render_fractor_helper(t_program *program, long double x, long double
 {
 	opt_mlx_pixel_put(program->img, x, y,
 		generate_color(
-			program->max_iteration,
+			program,
 			scale(x, 0, WIN_WIDTH, program->left_x, program->right_x),
-			scale(y, 0, WIN_HEIGHT, program->top_y, program->bottom_y),
-			program->color_pallete));
+			scale(y, 0, WIN_HEIGHT, program->top_y, program->bottom_y)));
 }
 
 int	render_fractor(t_program *program)
@@ -27,8 +26,6 @@ int	render_fractor(t_program *program)
 	long double	x;
 	long double	y;
 
-	if (!ft_strcmp("mandelbrot", program->fractol_type))
-	{
 		y = 0;
 		while (y < WIN_HEIGHT)
 		{
@@ -40,7 +37,6 @@ int	render_fractor(t_program *program)
 			}
 			y++;
 		}
-	}
 	mlx_put_image_to_window(program->mlx,
 		program->win, program->img->img, 0, 0);
 	return (0);
@@ -49,8 +45,13 @@ int	render_fractor(t_program *program)
 void	fractol_init(t_program *program, char **argv)
 {
 	program->fractol_type = argv[1];
+	if (argv[1][0] == 'j')
+	{
+		program->c_x = ft_atoildbl(argv[2]);
+		program->c_y = ft_atoildbl(argv[3]);
+	}
 	program->color_pallete = 1;
-	program->max_iteration = 70;
+	program->max_iteration = 50;
 	program->right_x = 2;
 	program->left_x = -2;
 	program->top_y = 2;
@@ -81,7 +82,8 @@ void	fract_handler(char **argv)
 int	main(int argc, char **argv)
 {
 	if ((argc == 2 && !ft_strcmp("mandelbrot", argv[1]))
-		|| (argc == 4 && !ft_strcmp("julia", argv[1])))
+		|| (argc == 4 && !ft_strcmp("julia", argv[1]))
+		|| (argc == 2 && !ft_strcmp("burningship", argv[1])))
 		fract_handler(argv);
 	else
 		invalid_args_handler();
