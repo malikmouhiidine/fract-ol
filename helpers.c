@@ -6,7 +6,7 @@
 /*   By: mmouhiid <mmouhiid@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/20 03:42:54 by mmouhiid          #+#    #+#             */
-/*   Updated: 2023/12/22 18:26:12 by mmouhiid         ###   ########.fr       */
+/*   Updated: 2023/12/22 22:41:10 by mmouhiid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,7 +110,7 @@ int is_valid_double(char *str)
             if (i != 0)
                 return (0);
         }
-        else if (str[i] < '0' || str[i] > '9')
+        else if (str[i] != '.' && (str[i] < '0' || str[i] > '9'))
             return (0);
         i++;
     }
