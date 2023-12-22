@@ -6,7 +6,7 @@
 /*   By: mmouhiid <mmouhiid@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/20 03:40:33 by mmouhiid          #+#    #+#             */
-/*   Updated: 2023/12/21 22:39:09 by mmouhiid         ###   ########.fr       */
+/*   Updated: 2023/12/22 17:10:22 by mmouhiid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,15 +57,23 @@ void	fractol_init(t_program *program, char **argv)
 	program->top_y = 2;
 	program->bottom_y = -2;
 	program->mlx = mlx_init();
+	if (!program->mlx)
+		exit_handler(program);
 	program->win = mlx_new_window(program->mlx, WIN_WIDTH, WIN_HEIGHT, argv[1]);
+	if (!program->win)
+		exit_handler(program);
 	mlx_key_hook(program->win, key_hook, program);
 	mlx_mouse_hook(program->win, mouse_hook, program);
-	mlx_hook(program->win, 17, 0, close_window, program);
+	mlx_hook(program->win, 17, 0, exit_handler, program);
 	program->img->img = mlx_new_image(program->mlx, WIN_WIDTH, WIN_HEIGHT);
+	if (!program->img->img)
+		exit_handler(program);
 	program->img->addr = mlx_get_data_addr(program->img->img,
 			&program->img->bits_per_pixel,
 			&program->img->line_length,
 			&program->img->endian);
+	if (!program->img->addr)
+		exit_handler(program);
 }
 
 void	fract_handler(char **argv)
@@ -73,7 +81,11 @@ void	fract_handler(char **argv)
 	t_program	*program;
 
 	program = (t_program *)malloc(sizeof(t_program));
+	if (!program)
+		exit_handler(program);
 	program->img = (t_image *)malloc(sizeof(t_image));
+	if (!program->img)
+		exit_handler(program);
 	fractol_init(program, argv);
 	mlx_loop_hook(program->mlx, render_fractor, program);
 	mlx_loop(program->mlx);
@@ -86,6 +98,9 @@ int	main(int argc, char **argv)
 		|| (argc == 2 && !ft_strcmp("burningship", argv[1])))
 		fract_handler(argv);
 	else
-		invalid_args_handler();
+	{
+		ft_putstr_fd(ERROR_MSG, 2);
+		exit(1);
+	}
 	return (0);
 }

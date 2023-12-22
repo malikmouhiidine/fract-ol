@@ -6,7 +6,7 @@
 /*   By: mmouhiid <mmouhiid@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/20 03:42:54 by mmouhiid          #+#    #+#             */
-/*   Updated: 2023/12/21 18:10:56 by mmouhiid         ###   ########.fr       */
+/*   Updated: 2023/12/22 17:09:43 by mmouhiid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,10 +33,18 @@ long double	scale(long double number, long double inMin, long double inMax,
 	return (scaled_value);
 }
 
-void	invalid_args_handler(void)
+int exit_handler(t_program *program)
 {
-	ft_putstr_fd(ERROR_MSG, 2);
-	exit(1);
+    printf("exit_handler\n");
+    if (program->img)
+        mlx_destroy_image(program->mlx, program->img->img);
+    if (program->win && program->mlx)
+        mlx_destroy_window(program->mlx, program->win);
+    if (program)
+        free(program);
+    if (program->img)
+        free(program->img);
+    exit(0);
 }
 
 void	opt_mlx_pixel_put(t_image *img, int x, int y, int color)
@@ -54,7 +62,7 @@ long double ft_atoildbl(char *str)
     long double		sign;
     long double		decimal_place;
 
-    res = 0;
+    res = 0L;
     sign = 1;
     i = 0;
     decimal_place = 1;

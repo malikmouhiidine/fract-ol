@@ -6,7 +6,7 @@
 /*   By: mmouhiid <mmouhiid@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/20 05:10:12 by mmouhiid          #+#    #+#             */
-/*   Updated: 2023/12/21 22:39:22 by mmouhiid         ###   ########.fr       */
+/*   Updated: 2023/12/22 17:09:19 by mmouhiid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,9 +33,7 @@ int	get_color(int iteration, int max_iteration, int color_pallete)
 			return (0);
 	}
 	else
-	{
 		return (0);
-	}
 }
 
 int	generate_color(t_program *program, long double xo, long double yo)
@@ -44,6 +42,7 @@ int	generate_color(t_program *program, long double xo, long double yo)
 	long double	y;
 	long double	x2;
 	long double	y2;
+	long double R;
 	int		iteration;
 
 	x = 0;
@@ -65,9 +64,9 @@ int	generate_color(t_program *program, long double xo, long double yo)
 	}
 	else if (!ft_strcmp("julia", program->fractol_type))
 	{
-		long double R = 0;
+		R = 0;
 		while (R * R - R < sqrt(program->c_x * program->c_x + program->c_y * program->c_y)) {
-			R += 0.01;
+			R += 0.1;
 		}
 		x = xo;
 		y = yo;

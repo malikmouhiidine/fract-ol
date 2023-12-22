@@ -6,17 +6,11 @@
 /*   By: mmouhiid <mmouhiid@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/20 04:59:30 by mmouhiid          #+#    #+#             */
-/*   Updated: 2023/12/21 17:28:02 by mmouhiid         ###   ########.fr       */
+/*   Updated: 2023/12/22 09:10:39 by mmouhiid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
-
-int	close_window(t_program *param)
-{
-	(void)param;
-	exit(0);
-}
 
 void	key_hook_helper(int keycode, t_program *program, long double offset)
 {
@@ -52,7 +46,7 @@ void	key_hook_helper(int keycode, t_program *program, long double offset)
 			program->color_pallete = 1;
 	}
 	else if (keycode == 53)
-		exit(0);
+		exit_handler(program);
 }
 
 int	key_hook(int keycode, t_program *program)
