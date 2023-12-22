@@ -6,7 +6,7 @@
 /*   By: mmouhiid <mmouhiid@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/20 03:40:40 by mmouhiid          #+#    #+#             */
-/*   Updated: 2023/12/22 14:25:43 by mmouhiid         ###   ########.fr       */
+/*   Updated: 2023/12/22 17:39:14 by mmouhiid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,11 +53,10 @@ int			ft_strcmp(char *s1, char *s2);
 void		opt_mlx_pixel_put(t_image *img, int x, int y, int color);
 long double	scale(long double number, long double inMin, long double inMax,
 			long double outMin, long double outMax);
-
 int			close_window(t_program *param);
 void		key_hook_helper(int keycode, t_program *program, long double offset);
 int			key_hook(int keycode, t_program *program);
 int			mouse_hook(int keycode, int x, int y, t_program *program);
-
+int			render_fractor(t_program *program);
 int			get_color(int iteration, int max_iteration, int color_pallete);
 int			generate_color(t_program *program, long double xo, long double yo);

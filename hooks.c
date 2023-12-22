@@ -6,7 +6,7 @@
 /*   By: mmouhiid <mmouhiid@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/20 04:59:30 by mmouhiid          #+#    #+#             */
-/*   Updated: 2023/12/22 09:10:39 by mmouhiid         ###   ########.fr       */
+/*   Updated: 2023/12/22 17:37:27 by mmouhiid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,7 @@ int	key_hook(int keycode, t_program *program)
 
 	offset = fabsl(program->right_x - program->left_x) / 16;
 	key_hook_helper(keycode, program, offset);
+	render_fractor(program);
 	return (0);
 }
 
@@ -82,6 +83,7 @@ int	mouse_hook(int keycode, int x, int y, t_program *program)
 				program->top_y - mouse_y_scaled);
 		program->bottom_y = mouse_y_scaled + zoom_factor * (
 				program->bottom_y - mouse_y_scaled);
+		render_fractor(program);
 	}
 	return (0);
 }

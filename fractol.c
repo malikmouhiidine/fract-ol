@@ -6,7 +6,7 @@
 /*   By: mmouhiid <mmouhiid@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/20 03:40:33 by mmouhiid          #+#    #+#             */
-/*   Updated: 2023/12/22 17:10:22 by mmouhiid         ###   ########.fr       */
+/*   Updated: 2023/12/22 17:35:57 by mmouhiid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,7 @@ void	fract_handler(char **argv)
 	if (!program->img)
 		exit_handler(program);
 	fractol_init(program, argv);
-	mlx_loop_hook(program->mlx, render_fractor, program);
+	render_fractor(program);
 	mlx_loop(program->mlx);
 }
 
