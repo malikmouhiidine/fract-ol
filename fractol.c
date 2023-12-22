@@ -6,7 +6,7 @@
 /*   By: mmouhiid <mmouhiid@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/20 03:40:33 by mmouhiid          #+#    #+#             */
-/*   Updated: 2023/12/22 17:35:57 by mmouhiid         ###   ########.fr       */
+/*   Updated: 2023/12/22 18:28:17 by mmouhiid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,7 +94,8 @@ void	fract_handler(char **argv)
 int	main(int argc, char **argv)
 {
 	if ((argc == 2 && !ft_strcmp("mandelbrot", argv[1]))
-		|| (argc == 4 && !ft_strcmp("julia", argv[1]))
+		|| (argc == 4 && !ft_strcmp("julia", argv[1]) && is_valid_double(argv[2])
+			&& is_valid_double(argv[3]))
 		|| (argc == 2 && !ft_strcmp("burningship", argv[1])))
 		fract_handler(argv);
 	else
