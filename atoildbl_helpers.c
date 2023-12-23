@@ -6,11 +6,46 @@
 /*   By: mmouhiid <mmouhiid@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/20 03:42:54 by mmouhiid          #+#    #+#             */
-/*   Updated: 2023/12/23 09:09:51 by mmouhiid         ###   ########.fr       */
+/*   Updated: 2023/12/23 09:11:49 by mmouhiid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
+
+size_t	skip_whitespace(char *str)
+{
+	size_t	i;
+
+	i = 0;
+	while (str[i] == ' ' || str[i] == '\t' || str[i] == '\n'
+		|| str[i] == '\r' || str[i] == '\v' || str[i] == '\f')
+		i++;
+	return (i);
+}
+
+long double	process_digits(char *str, size_t *i, long double decimal_place)
+{
+	long double	res;
+
+	res = 0L;
+	while ((str[*i] >= '0' && str[*i] <= '9') || str[*i] == '.')
+	{
+		if (str[*i] == '.')
+		{
+			decimal_place = 0.1;
+			(*i)++;
+		}
+		if (decimal_place == 1)
+			res = res * 10 + (str[*i] - '0');
+		else
+		{
+			res = res + (str[*i] - '0') * decimal_place;
+			decimal_place /= 10;
+		}
+		(*i)++;
+	}
+	return (res);
+}
 
 long double	ft_atoildbl(char *str)
 {
@@ -21,31 +56,13 @@ long double	ft_atoildbl(char *str)
 
 	res = 0L;
 	sign = 1;
-	i = 0;
 	decimal_place = 1;
-	while (str[i] == ' ' || str[i] == '\t' || str[i] == '\n'
-		|| str[i] == '\r' || str[i] == '\v' || str[i] == '\f')
-		i++;
+	i = skip_whitespace(str);
 	if (str[i] == '-')
 		sign = -1;
 	if (str[i] == '-' || str[i] == '+')
 		i++;
-	while ((str[i] >= '0' && str[i] <= '9') || str[i] == '.')
-	{
-		if (str[i] == '.')
-		{
-			decimal_place = 0.1;
-			i++;
-		}
-		if (decimal_place == 1)
-			res = res * 10 + (str[i] - '0');
-		else
-		{
-			res = res + (str[i] - '0') * decimal_place;
-			decimal_place /= 10;
-		}
-		i++;
-	}
+	res = process_digits(str, &i, decimal_place);
 	return (res * sign);
 }
 

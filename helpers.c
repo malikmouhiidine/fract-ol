@@ -6,7 +6,7 @@
 /*   By: mmouhiid <mmouhiid@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/20 03:42:54 by mmouhiid          #+#    #+#             */
-/*   Updated: 2023/12/23 09:09:06 by mmouhiid         ###   ########.fr       */
+/*   Updated: 2023/12/23 09:17:48 by mmouhiid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,13 +22,13 @@ int	ft_strcmp(char *s1, char *s2)
 	return (s1[i] - s2[i]);
 }
 
-long double	scale(long double number, long double inMin, long double inMax,
+long double	scale(long double number, long double inMax,
 		long double outMin, long double outMax)
 {
 	long double	scaled_value;
 
-	scaled_value = (number - inMin) * (outMax - outMin);
-	scaled_value = scaled_value / (inMax - inMin);
+	scaled_value = (number - 0) * (outMax - outMin);
+	scaled_value = scaled_value / (inMax - 0);
 	scaled_value = scaled_value + outMin;
 	return (scaled_value);
 }

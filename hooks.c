@@ -6,7 +6,7 @@
 /*   By: mmouhiid <mmouhiid@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/20 04:59:30 by mmouhiid          #+#    #+#             */
-/*   Updated: 2023/12/23 08:45:36 by mmouhiid         ###   ########.fr       */
+/*   Updated: 2023/12/23 09:18:58 by mmouhiid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,9 +30,9 @@ int	mouse_hook(int keycode, int x, int y, t_program *program)
 
 	if (y >= 0 && x >= 0 && (keycode == 5 || keycode == 4))
 	{
-		mouse_x_scaled = scale(x, 0, WIN_WIDTH, program->left_x,
+		mouse_x_scaled = scale(x, WIN_WIDTH, program->left_x,
 				program->right_x);
-		mouse_y_scaled = scale(y, 0, WIN_HEIGHT, program->top_y,
+		mouse_y_scaled = scale(y, WIN_HEIGHT, program->top_y,
 				program->bottom_y);
 		if (keycode == 4)
 			zoom_factor = 0.85;

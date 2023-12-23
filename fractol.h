@@ -6,7 +6,7 @@
 /*   By: mmouhiid <mmouhiid@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/20 03:40:40 by mmouhiid          #+#    #+#             */
-/*   Updated: 2023/12/23 08:46:00 by mmouhiid         ###   ########.fr       */
+/*   Updated: 2023/12/23 09:18:26 by mmouhiid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ long double	ft_atoildbl(char *str);
 int			exit_handler(t_program *program);
 int			ft_strcmp(char *s1, char *s2);
 void		opt_mlx_pixel_put(t_image *img, int x, int y, int color);
-long double	scale(long double number, long double inMin, long double inMax,
+long double	scale(long double number, long double inMax,
 				long double outMin, long double outMax);
 int			close_window(t_program *param);
 void		key_hook_helper(int keycode, t_program *program,

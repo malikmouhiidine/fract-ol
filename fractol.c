@@ -6,7 +6,7 @@
 /*   By: mmouhiid <mmouhiid@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/20 03:40:33 by mmouhiid          #+#    #+#             */
-/*   Updated: 2023/12/23 08:42:52 by mmouhiid         ###   ########.fr       */
+/*   Updated: 2023/12/23 09:18:46 by mmouhiid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,8 @@ static void	render_fractor_helper(t_program *program,
 	opt_mlx_pixel_put(program->img, x, y,
 		generate_color(
 			program,
-			scale(x, 0, WIN_WIDTH, program->left_x, program->right_x),
-			scale(y, 0, WIN_HEIGHT, program->top_y, program->bottom_y)));
+			scale(x, WIN_WIDTH, program->left_x, program->right_x),
+			scale(y, WIN_HEIGHT, program->top_y, program->bottom_y)));
 }
 
 int	render_fractor(t_program *program)
