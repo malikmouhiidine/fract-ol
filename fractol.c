@@ -12,7 +12,8 @@
 
 #include "fractol.h"
 
-static void	render_fractor_helper(t_program *program, long double x, long double y)
+static void	render_fractor_helper(t_program *program,
+		long double x, long double y)
 {
 	opt_mlx_pixel_put(program->img, x, y,
 		generate_color(
@@ -26,17 +27,17 @@ int	render_fractor(t_program *program)
 	long double	x;
 	long double	y;
 
-		y = 0;
-		while (y < WIN_HEIGHT)
+	y = 0;
+	while (y < WIN_HEIGHT)
+	{
+		x = 0;
+		while (x < WIN_WIDTH)
 		{
-			x = 0;
-			while (x < WIN_WIDTH)
-			{
-				render_fractor_helper(program, x, y);
-				x++;
-			}
-			y++;
+			render_fractor_helper(program, x, y);
+			x++;
 		}
+		y++;
+	}
 	mlx_put_image_to_window(program->mlx,
 		program->win, program->img->img, 0, 0);
 	return (0);
@@ -60,7 +61,8 @@ void	fract_handler(char **argv)
 int	main(int argc, char **argv)
 {
 	if ((argc == 2 && !ft_strcmp("mandelbrot", argv[1]))
-		|| (argc == 4 && !ft_strcmp("julia", argv[1]) && is_valid_double(argv[2])
+		|| (argc == 4 && !ft_strcmp("julia", argv[1])
+			&& is_valid_double(argv[2])
 			&& is_valid_double(argv[3]))
 		|| (argc == 2 && !ft_strcmp("burningship", argv[1])))
 		fract_handler(argv);
