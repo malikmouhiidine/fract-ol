@@ -6,7 +6,7 @@
 /*   By: mmouhiid <mmouhiid@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/20 03:40:40 by mmouhiid          #+#    #+#             */
-/*   Updated: 2023/12/23 08:23:10 by mmouhiid         ###   ########.fr       */
+/*   Updated: 2023/12/23 08:27:35 by mmouhiid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,16 @@
 
 #define WIN_HEIGHT 800
 #define WIN_WIDTH 800
+
+typedef struct vars
+{
+	long double	x;
+	long double	y;
+	long double	x2;
+	long double	y2;
+	long double R;
+	int		iteration;
+}				t_vars;
 
 typedef struct s_image
 {
