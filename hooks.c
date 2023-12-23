@@ -6,48 +6,11 @@
 /*   By: mmouhiid <mmouhiid@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/20 04:59:30 by mmouhiid          #+#    #+#             */
-/*   Updated: 2023/12/22 17:37:27 by mmouhiid         ###   ########.fr       */
+/*   Updated: 2023/12/23 08:45:36 by mmouhiid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
-
-void	key_hook_helper(int keycode, t_program *program, long double offset)
-{
-	if (keycode == 24)
-		program->max_iteration += 10;
-	else if (keycode == 27 && program->max_iteration > 10)
-		program->max_iteration -= 10;
-	else if (keycode == 126)
-	{
-		program->top_y += offset;
-		program->bottom_y += offset;
-	}
-	else if (keycode == 125)
-	{
-		program->top_y -= offset;
-		program->bottom_y -= offset;
-	}
-	else if (keycode == 124)
-	{
-		program->right_x += offset;
-		program->left_x += offset;
-	}
-	else if (keycode == 123)
-	{
-		program->right_x -= offset;
-		program->left_x -= offset;
-	}
-	else if (keycode == 8)
-	{
-		if (program->color_pallete == 1)
-			program->color_pallete = 2;
-		else
-			program->color_pallete = 1;
-	}
-	else if (keycode == 53)
-		exit_handler(program);
-}
 
 int	key_hook(int keycode, t_program *program)
 {

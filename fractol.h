@@ -6,7 +6,7 @@
 /*   By: mmouhiid <mmouhiid@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/20 03:40:40 by mmouhiid          #+#    #+#             */
-/*   Updated: 2023/12/23 08:27:35 by mmouhiid         ###   ########.fr       */
+/*   Updated: 2023/12/23 08:46:00 by mmouhiid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,3 +73,4 @@ int			generate_color(t_program *program, long double xo, long double yo);
 int			is_valid_double(char *str);
 void		fractol_init(t_program *program, char **argv);
 int			get_color(int iteration, int max_iteration, int color_pallete);
+void		key_hook_helper(int keycode, t_program *program, long double offset);
