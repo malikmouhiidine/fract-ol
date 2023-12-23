@@ -6,7 +6,7 @@
 /*   By: mmouhiid <mmouhiid@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/20 03:40:40 by mmouhiid          #+#    #+#             */
-/*   Updated: 2023/12/22 18:27:35 by mmouhiid         ###   ########.fr       */
+/*   Updated: 2023/12/23 08:23:10 by mmouhiid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,3 +61,5 @@ int			render_fractor(t_program *program);
 int			get_color(int iteration, int max_iteration, int color_pallete);
 int			generate_color(t_program *program, long double xo, long double yo);
 int			is_valid_double(char *str);
+void		fractol_init(t_program *program, char **argv);
+int			get_color(int iteration, int max_iteration, int color_pallete);
