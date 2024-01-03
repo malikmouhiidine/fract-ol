@@ -6,11 +6,10 @@
 /*   By: mmouhiid <mmouhiid@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/20 03:40:40 by mmouhiid          #+#    #+#             */
-/*   Updated: 2023/12/23 09:18:26 by mmouhiid         ###   ########.fr       */
+/*   Updated: 2024/01/03 17:04:41 by mmouhiid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
 #include <math.h>
 #include <unistd.h>
 #include <stdlib.h>

@@ -6,7 +6,7 @@
 /*   By: mmouhiid <mmouhiid@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/20 03:42:54 by mmouhiid          #+#    #+#             */
-/*   Updated: 2023/12/23 09:17:48 by mmouhiid         ###   ########.fr       */
+/*   Updated: 2024/01/03 17:04:24 by mmouhiid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,6 @@ long double	scale(long double number, long double inMax,
 
 int	exit_handler(t_program *program)
 {
-	printf("exit_handler\n");
 	if (program->img)
 		mlx_destroy_image(program->mlx, program->img->img);
 	if (program->win && program->mlx)
