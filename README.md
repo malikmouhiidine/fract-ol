@@ -1,4 +1,5 @@
 # Gallery
+Some screenshots caught while navigating this magnificent world.
 
 <img width="500" alt="Screen Shot 2023-12-22 at 8 12 30 PM" src="https://github.com/malikmouhiidine/fract-ol/assets/73129654/ab9f9987-52a3-4290-b707-e1dcec225282">
 <img width="500" alt="Screen Shot 2023-12-21 at 10 46 37 PM" src="https://github.com/malikmouhiidine/fract-ol/assets/73129654/d531e89d-f14f-4f7c-b0d4-f2a78b9e5cdd">
